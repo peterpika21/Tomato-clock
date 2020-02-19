@@ -6,9 +6,15 @@
     bottom: 0;
     transform: translateX(-50%);
   }
+
+  &--border{
+    border:2px solid #e8e8e8;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 }
 
 .clock{
   font-size: 200px;
-  color: #fff;
+  color: #e8e8e8;
 }
