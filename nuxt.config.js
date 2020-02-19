@@ -5,7 +5,7 @@ module.exports = {
 
   // head 配置
   head: {
-    titleTemplate: '自我練習',
+    titleTemplate: '番茄鐘',
     meta: [
       {
         charset: 'utf-8'
@@ -17,7 +17,7 @@ module.exports = {
       {
         hid: 'description',
         name: 'description',
-        content: '自我練習'
+        content: '番茄鐘'
       }
     ],
     link: [
@@ -32,7 +32,11 @@ module.exports = {
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Roboto'
+        href: 'https://fonts.googleapis.com/css?family=Fjalla+One&display=swap'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap'
       }
     ]
   },
@@ -51,7 +55,7 @@ module.exports = {
   // 客製化配置 nuxt 應用路由
   router: {
     // 配合 github deploy 用 /nuxt/ 記得改成專案資料夾名稱才能 deploy
-    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/nuxt/' : '',
+    base: process.env.DEPLOY_ENV === 'GH_PAGES' ? '/Tomato-clock/' : '',
 
     mode: 'history',
     routes: [
