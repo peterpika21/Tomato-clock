@@ -1,0 +1,14 @@
+.svg{
+  &--bottomTomato{
+    width: 80%;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+}
+
+.clock{
+  font-size: 200px;
+  color: #fff;
+}
