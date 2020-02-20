@@ -79,18 +79,34 @@ module.exports = {
   // this is necessary
   build: {
     extractCSS: true,
+    loaders: {
+      vue: {
+        transformAssetUrls: {
+          audio: 'src'
+        }
+      }
+    },
     /*
      ** 您可以在这里扩展webpack配置
      */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+        config.module.rules.push(
+          {
+            enforce: 'pre',
+            test: /\.(js|vue)$/,
+            loader: 'eslint-loader',
+            exclude: /(node_modules)/
+          },
+          {
+            test: /\.(ogg|mp3|wav|mpe?g)$/i,
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]'
+            }
+          }
+        )
       }
     }
   }

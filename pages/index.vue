@@ -2,19 +2,29 @@
   section.flex-1.bg-primary(style="height:100%")
     div.pt-6.mx-auto.h-container.relative(style="height:100%")
       p.tx-gray.align-right {{fullDate}}
-      div
-        div.clock {{minutes}}:{{seconds}}
-        div.d-flex.align-items-center(style="margin-left:137px")
-          div.mr-4.p-2.svg--border
-            img(src="~assets/img/icon-bell.svg")
-          div.mr-4.p-4.svg--border.bg-gray(@click="start()")
-            img(v-if="isStart",src=`~assets/img/icon-pause--orange.svg`)
-            img(v-else,src=`~assets/img/icon-play--orange.svg`)
-          div.p-2.svg--border(@click="clear()")
-            img(src="~assets/img/icon-delete.svg")
+
+      div.d-flex.justify-content-between
+        // 左側
+        div
+          div.clock {{minutes}}:{{seconds}}
+          div.d-flex.align-items-center(style="margin-left:137px")
+            div.mr-4.p-2.svg--border(:class="{'bg-success':!$refs.audio.muted,'border-success':!$refs.audio.muted}",@click="$refs.audio.muted = !$refs.audio.muted")
+              img(src="~assets/img/icon-bell.svg")
+            div.mr-4.p-4.svg--border.bg-gray(@click="start()")
+              img(v-if="isStart",src=`~assets/img/icon-pause--orange.svg`)
+              img(v-else,src=`~assets/img/icon-play--orange.svg`)
+            div.p-2.svg--border(@click="clear()")
+              img(src="~assets/img/icon-delete.svg")
+
+        div.mt-6
+          p.tx-gray.font-style2.font-xxl(v-if="isStart") 奮鬥，GO GO GO !!
+          p.tx-gray.font-style2.font-xxl(v-else) 休息，能走更長遠的路
 
       // 底下番茄圖
-      embed.svg--bottomTomato(src="~assets/img/tomato--orange.svg")
+      img.svg--bottomTomato(v-if="isStart",src="~assets/img/tomato--orange.svg")
+      img.svg--bottomTomato(v-else,src="~assets/img/tomato--green.svg")
+
+      audio(ref="audio" src="~assets/music/01.mp3" type="audio/mpeg" loop)
 </template>
 
 <script>
@@ -52,14 +62,17 @@ export default {
       let vm = this
       if (this.isStart) {
         window.clearInterval(this.interval)
+        this.$refs.audio.pause()
       } else {
         this.interval = window.setInterval(function() {
           vm.counter()
         }, 1000)
+        this.$refs.audio.play()
       }
       this.isStart = !this.isStart
     },
     clear() {
+      this.$refs.audio.load()
       window.clearInterval(this.interval)
       this.setSecond = 1500
       this.minutes = '25'
