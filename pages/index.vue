@@ -8,7 +8,7 @@
         div
           div.clock {{minutes}}:{{seconds}}
           div.d-flex.align-items-center(style="margin-left:137px")
-            div.mr-4.p-2.svg--border(:class="{'bg-success':!$refs.audio.muted,'border-success':!$refs.audio.muted}",@click="$refs.audio.muted = !$refs.audio.muted")
+            div.mr-4.p-2.svg--border(v-if="$refs.audio",:class="{'bg-success':!$refs.audio.muted,'border-success':!$refs.audio.muted}",@click="$refs.audio.muted = !$refs.audio.muted")
               img(src="~assets/img/icon-bell.svg")
             div.mr-4.p-4.svg--border.bg-gray(@click="start()")
               img(v-if="isStart",src=`~assets/img/icon-pause--orange.svg`)
